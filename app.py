@@ -51,7 +51,7 @@ def Predict_level_of_pollution(data: Pollutants):
     prediction = prediction.tolist()
     return {
         'potability': prediction[0],
-        'AQI_Range' : 'Potable' if prediction[0]==1 else 'Not Potable'
+        'Result' : 'Potable' if prediction[0]==1 else 'Not Potable'
     }
 # @app.get('/{name}')
 # def get_name(name: str):
