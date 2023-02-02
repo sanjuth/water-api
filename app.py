@@ -2,15 +2,14 @@
 # 1. Library imports
 import uvicorn
 from fastapi import FastAPI
-from pollutants import Pollutants
-
+from pydantic import BaseModel
 import numpy as np
 import pickle
 import pandas as pd
 
 # 2. Create the app object
 app = FastAPI()
-pickle_in = open("random-forest-water.sav", "rb")
+pickle_in = open("./static/random-forest-water.sav", "rb")
 classifier = pickle.load(pickle_in)
 
 
@@ -27,7 +26,16 @@ def Inputs_to_api():
 
 # 4. Route with a single parameter, returns the parameter within a message
 #    Located at: http://127.0.0.1:8000/AnyNameHere
-
+class Pollutants(BaseModel):
+    ph: float
+    Hardness: float
+    Solids: float
+    Chloramines: float
+    Sulfate: float
+    Conductivity: float
+    Organic_carbon: float
+    Trihalomethanes: float
+    Turbidity: float
 
 # 3. Expose the prediction functionality, make a prediction from the passed
 #    JSON data and return the predicted Bank Note with the confidence
